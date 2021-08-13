@@ -1,0 +1,48 @@
+
+=> Install httpd and start&enable its service
+
+  # sudo yum update
+  # sudo yum install httpd
+  # sudo systemctl enable httpd --now
+
+=> Install php and also its dependency    
+
+  # sudo  amazon-linux-extras | grep php
+  # sudo amazon-linux-extras enable php7.4
+  # sudo  yum clean metadata  
+  # sudo yum install php php-{iconv,mbstring,curl,openssl,tokenizer,xmlrpc,soap,ctype,zip,gd,simplexml,spl,dom,xml,intl,json,pear,cgi,common,mbstring,gd,mysqlnd,gettext,bcmath,xml,fpm,imap}   # sudo yum search php
+
+=> Install mariadb server and start&enable its service
+ 
+  # sudo amazon-linux-extras | grep mariadb
+  # sudo amazon-linux-extras enable mariadb10.5
+  # sudo yum clean metadata
+  # sudo  yum install mariadb
+  # sudo systemctl enable mariadb.service --now
+  # sudo systemctl status mariadb.service
+  # mysql_secure_installation
+  # sudo mysql -u root -p
+    - CREATE DATABASE moodle DEFAULT CHARACTER SET UTF8 COLLATE utf8_unicode_ci;
+    - CREATE USER 'moodleuser'@'localhost' IDENTIFIED BY 'password';
+    - GRANT ALL PRIVILEGES ON moodle.* TO 'moodleuser'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+    - FLUSH PRIVILEGES;
+ 
+=> Install moodle 
+
+  # wget https://download.moodle.org/download.php/direct/stable311/moodle-latest-311.zip
+  # unzip moodle-latest-311.zip
+  # sudo mv moodle /var/www/html/
+  # sudo chmod 777 /var/www/
+  
+=> Make directory for storing data and give permisiion to all 
+  # cd /var/
+  # sudo mkdir moodle_data
+  # sudo chmod 777 /var/moodle_data/
+  
+
+=> Copy the contents which display when you install the moodle to config.php 
+  # cd /var/www/html/moodle/
+  # vi config.php
+  cat config.php
+      
+
